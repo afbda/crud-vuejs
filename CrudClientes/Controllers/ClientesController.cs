@@ -31,16 +31,16 @@ namespace CrudClientes.Controllers
 
         // POST api/values
         [HttpPost]
-        public void Post()
+        public void Post([FromBody]Cliente cliente)
         {
-            _service.Inserir(new Cliente());
+            _service.Inserir(cliente);
         }
 
         // PUT api/values/5
         [HttpPut]
-        public void Update()
+        public void Update([FromBody]Cliente cliente)
         {
-            _service.Atualizar(new Cliente());
+            _service.Atualizar(cliente);
         }
 
         // DELETE api/values/5
