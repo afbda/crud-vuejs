@@ -81,11 +81,11 @@ export default {
       this.cliente.situacao = true
       if (this.$route.params.id !== undefined) {
         console.log(this.cliente)
-        Axios.put('http://localhost:51401/api/clientes/').then(() => {
+        Axios.put('http://localhost:51401/api/clientes/', this.cliente).then(() => {
           this.$router.go(-1)
         })
       } else {
-        Axios.post('http://localhost:51401/api/clientes/', {'cliente': this.cliente}).then(() => {
+        Axios.post('http://localhost:51401/api/clientes/', this.cliente).then(() => {
           this.$router.go(-1)
         })
       }
