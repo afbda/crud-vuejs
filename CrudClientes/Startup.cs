@@ -6,6 +6,8 @@ using CrudClientes.Business;
 using CrudClientes.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Cors;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -28,7 +30,14 @@ namespace CrudClientes
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
-            services.AddCors();
+            services.AddCors(options =>
+                options.AddPolicy("default", policy =>
+                    policy.WithOrigins("http://localhost:8080")
+                            .AllowAnyHeader()
+                            .AllowAnyMethod()
+                )
+            );
+
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseInMemoryDatabase("InMemoryDatabase"));
             services.AddScoped<ClienteService>();
@@ -42,8 +51,7 @@ namespace CrudClientes
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseCors(builder =>
-                builder.WithOrigins("http://localhost:8080"));
+            app.UseCors("default");
 
             app.UseMvc();
         }

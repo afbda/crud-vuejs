@@ -1,6 +1,9 @@
 <template>
   <div>
     <h1>Clientes</h1>
+    <b-button size="sm" @click="novo()" class="mr-2" variant="primary">
+      Novo
+    </b-button>
     <p v-if="clientes == undefined || clientes.length == 0">Nenhum cliente encontrado.</p>
     <table v-else class="table">
       <tr>
@@ -45,6 +48,9 @@ export default {
   methods: {
     editar: function (row) {
       this.$router.push({path: '/editar/' + row.clienteId})
+    },
+    novo: function () {
+      this.$router.push({path: '/novo'})
     },
     buscarCliente: function () {
       Axios.get('http://localhost:51401/api/clientes/')

@@ -74,6 +74,10 @@ export default {
       }
     },
     salvar: function () {
+      if (!this.cliente.cpf || !this.cliente.nome || !this.cliente.email) {
+        this.$swal('Todos os campos são obrigatórios')
+        return
+      }
       if (this.cliente.telefones === undefined || this.cliente.telefones.length === 0) {
         this.$swal('É necessário ao menos um telefone cadastrado')
         return

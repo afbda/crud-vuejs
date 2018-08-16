@@ -33,6 +33,7 @@ namespace CrudClientes.Business
         public void Inserir(Cliente cliente)
         {
             _context.Clientes.Add(cliente);
+            cliente.Telefones.ForEach(t => _context.TelefoneClientes.Add(t));
             _context.SaveChanges();
         }
 
