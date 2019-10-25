@@ -40,20 +40,17 @@
 import Axios from 'axios'
 export default {
   methods: {
-    buscarCliente: function (id) {
-      Axios.get('http://localhost:51401/api/clientes/' + id)
-      .then((retorno) => {
-        console.log(retorno)
-        if (retorno.data === '') {
-          this.$swal({
-            type: 'error',
-            title: 'Oops...',
-            text: 'Nenhum usuário encontrado'
-          })
-          this.$router.replace('/')
-        }
-        this.cliente = retorno.data
-      })
+    buscarCliente: async function (id) {
+      var retorno = await Axios.get('http://localhost:51401/api/clientes/' + id);
+      if(retorno.data === ''){
+        this.$swal({
+          type: 'error',
+          title: 'Oops...',
+          text: 'Nenhum usuário encontrado'
+        })
+        this.$router.replace('/')
+      }
+      this.cliente = retorno.data;
     },
     adicionarTelefone: function () {
       if (this.cliente.telefones === undefined) {
@@ -66,11 +63,10 @@ export default {
     excluirTelefone: function (telefone) {
       var index = this.cliente.telefones.indexOf(telefone)
       if (index > -1) {
-        this.cliente.telefones.splice(index, 1)
-        console.log(this.cliente.telefones)
+        this.clientes.telefones = this.cliente.telefones.splice(index, 1);
       }
       if (telefone.id !== undefined) {
-        Axios.delete('http://localhost:51401/api/telefones/' + telefone.id)
+        await Axios.delete('http://localhost:51401/api/telefones/' + telefone.id)
       }
     },
     salvar: function () {
@@ -85,13 +81,11 @@ export default {
       this.cliente.situacao = true
       if (this.$route.params.id !== undefined) {
         console.log(this.cliente)
-        Axios.put('http://localhost:51401/api/clientes/', this.cliente).then(() => {
-          this.$router.go(-1)
-        })
+        await Axios.put('http://localhost:51401/api/clientes/', this.cliente);
+        this.$router.go(-1);
       } else {
-        Axios.post('http://localhost:51401/api/clientes/', this.cliente).then(() => {
-          this.$router.go(-1)
-        })
+        await Axios.post('http://localhost:51401/api/clientes/', this.cliente);
+        this.$router.go(-1);
       }
     }
   },
