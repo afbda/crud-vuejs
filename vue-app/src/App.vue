@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <b-navbar toggleable="md" type="dark" variant="dark">
-      <b-navbar-brand to="/">Crud Clientes</b-navbar-brand>
+      <b-navbar-brand to="/">User Crud</b-navbar-brand>
     </b-navbar>
     <router-view></router-view>
   </div>

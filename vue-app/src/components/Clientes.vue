@@ -29,7 +29,7 @@
       </tr>
     </table>
   </div>
-  
+
 </template>
 
 <script>
@@ -52,18 +52,13 @@ export default {
     novo: function () {
       this.$router.push({path: '/novo'})
     },
-    buscarCliente: function () {
-      Axios.get('http://localhost:51401/api/clientes/')
-      .then((retorno) => {
-        this.clientes = retorno.data
-      })
+    async buscarCliente: function () {
+      var retorno = await Axios.get('http://localhost:51401/api/clientes/');
+      this.clientes = retorno.data;
     },
-    excluir: (row) => {
-      console.log(row)
-      Axios.delete('http://localhost:51401/api/clientes/' + row.clienteId).then(() => {
-        // this.$swal('Usuário excluído com sucesso')
-        this.$router.go(this.$router.currentRoute)
-      })
+    async excluir: (row) => {
+      await Axios.delete('http://localhost:51401/api/clientes/' + row.clienteId)
+      this.$router.go(this.$router.currentRoute)
     }
   }
 }
