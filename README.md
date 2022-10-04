@@ -4,7 +4,7 @@
 
 > Simples CRUD de clientes usando VUE.js, Axios, Vue-bootstrap, Vue-router, ASP.NET Core, Entity Framework in memory.
 
-## Build Setup
+## Build Setup Frontend
 
 ``` bash
 # install dependencies
